@@ -62,6 +62,8 @@ pub struct WindowConfig {
     pub(crate) resizable: Option<bool>,
     pub(crate) transparent: Option<bool>,
     pub(crate) show_titlebar: Option<bool>,
+    pub(crate) show_in_taskbar: Option<bool>,
+    pub(crate) always_on_top: Option<bool>,
     pub(crate) level: Option<WindowLevel>,
     pub(crate) state: Option<WindowState>,
 }
@@ -279,6 +281,8 @@ impl Default for WindowConfig {
             position: None,
             resizable: None,
             show_titlebar: None,
+            show_in_taskbar: None,
+            always_on_top: None,
             transparent: None,
             level: None,
             state: None,
@@ -351,6 +355,18 @@ impl WindowConfig {
         self
     }
 
+    /// Set whether the window should have a titlebar and decorations.
+    pub fn show_in_taskbar(mut self, show_in_taskbar: bool) -> Self {
+        self.show_in_taskbar = Some(show_in_taskbar);
+        self
+    }
+
+    /// Set whether the window should have a titlebar and decorations.
+    pub fn set_always_on_top(mut self, always_on_top: bool) -> Self {
+        self.always_on_top = Some(always_on_top);
+        self
+    }
+
     /// Sets the window position in virtual screen coordinates.
     /// [`position`] Position in pixels.
     ///
@@ -390,6 +406,14 @@ impl WindowConfig {
 
         if let Some(show_titlebar) = self.show_titlebar {
             builder.show_titlebar(show_titlebar);
+        }
+
+        if let Some(show_in_taskbar) = self.show_in_taskbar {
+            builder.show_in_taskbar(show_in_taskbar);
+        }
+
+        if let Some(always_on_top) = self.always_on_top {
+            builder.set_always_on_top(always_on_top);
         }
 
         if let Some(size) = self.size {
@@ -550,6 +574,18 @@ impl<T: Data> WindowDesc<T> {
     /// Builder-style method to set whether this window's titlebar is visible.
     pub fn show_titlebar(mut self, show_titlebar: bool) -> Self {
         self.config = self.config.show_titlebar(show_titlebar);
+        self
+    }
+
+    /// Builder-style method to set whether the window should have an icon in taskbar.
+    pub fn show_in_taskbar(mut self, show_in_taskbar: bool) -> Self {
+        self.config = self.config.show_in_taskbar(show_in_taskbar);
+        self
+    }
+
+    /// Builder-style method to set whether the window should be always on as top as possible.
+    pub fn set_always_on_top(mut self, always_on_top: bool) -> Self {
+        self.config = self.config.set_always_on_top(always_on_top);
         self
     }
 

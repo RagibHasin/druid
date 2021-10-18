@@ -93,6 +93,8 @@ pub(crate) struct WindowBuilder {
     present_strategy: PresentStrategy,
     resizable: bool,
     show_titlebar: bool,
+    show_in_taskbar: bool,
+    always_on_top: bool,
     size: Option<Size>,
     transparent: bool,
     min_size: Option<Size>,
@@ -1281,6 +1283,8 @@ impl WindowBuilder {
             menu: None,
             resizable: true,
             show_titlebar: true,
+            show_in_taskbar: true,
+            always_on_top: false,
             transparent: false,
             present_strategy: Default::default(),
             size: None,
@@ -1310,6 +1314,14 @@ impl WindowBuilder {
 
     pub fn show_titlebar(&mut self, show_titlebar: bool) {
         self.show_titlebar = show_titlebar;
+    }
+
+    pub fn show_in_taskbar(&mut self, show_in_taskbar: bool) {
+        self.show_in_taskbar = show_in_taskbar;
+    }
+
+    pub fn set_always_on_top(&mut self, always_on_top: bool) {
+        self.always_on_top = always_on_top;
     }
 
     pub fn set_transparent(&mut self, transparent: bool) {
@@ -1465,6 +1477,14 @@ impl WindowBuilder {
             }
             if !self.show_titlebar {
                 dwStyle &= !(WS_SYSMENU | WS_OVERLAPPED);
+            }
+
+            if !self.show_in_taskbar {
+                dwExStyle |= WS_EX_TOOLWINDOW;
+            }
+
+            if self.always_on_top {
+                dwExStyle |= WS_EX_TOPMOST;
             }
 
             if self.present_strategy == PresentStrategy::Flip {

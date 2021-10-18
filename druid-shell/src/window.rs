@@ -479,6 +479,16 @@ impl WindowBuilder {
         self.0.show_titlebar(show_titlebar)
     }
 
+    /// Set whether the window should have an icon in taskbar.
+    pub fn show_in_taskbar(&mut self, show_in_taskbar: bool) {
+        self.0.show_in_taskbar(show_in_taskbar)
+    }
+
+    /// Set whether the window should be always on as top as possible.
+    pub fn set_always_on_top(&mut self, always_on_top: bool) {
+        self.0.set_always_on_top(always_on_top)
+    }
+
     /// Set whether the window background should be transparent
     pub fn set_transparent(&mut self, transparent: bool) {
         self.0.set_transparent(transparent)
