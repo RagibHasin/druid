@@ -164,6 +164,14 @@ impl WindowBuilder {
         warn!("WindowBuilder::show_titlebar is currently unimplemented for X11 backend.");
     }
 
+    pub fn show_in_taskbar(&mut self, _show_in_taskbar: bool) {
+        warn!("WindowBuilder::show_in_taskbar is currently unimplemented for X11 backend.");
+    }
+
+    pub fn set_always_on_top(&mut self, _always_on_top: bool) {
+        warn!("WindowBuilder::set_always_on_top is currently unimplemented for X11 backend.");
+    }
+
     pub fn set_transparent(&mut self, transparent: bool) {
         self.transparent = transparent;
     }

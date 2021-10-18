@@ -221,6 +221,14 @@ impl WindowBuilder {
         self.show_titlebar = show_titlebar;
     }
 
+    pub fn show_in_taskbar(&mut self, _show_in_taskbar: bool) {
+        tracing::warn!("WindowBuilder::show_in_taskbar is currently unimplemented for MacOS.");
+    }
+
+    pub fn set_always_on_top(&mut self, _always_on_top: bool) {
+        tracing::warn!("WindowBuilder::set_always_on_top is currently unimplemented for MacOS.");
+    }
+
     pub fn set_transparent(&mut self, transparent: bool) {
         self.transparent = transparent;
     }

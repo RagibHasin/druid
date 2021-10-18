@@ -377,6 +377,14 @@ impl WindowBuilder {
         // Ignored
     }
 
+    pub fn show_in_taskbar(&mut self, show_in_taskbar: bool) {
+        // Ignored
+    }
+
+    pub fn set_always_on_top(&mut self, always_on_top: bool) {
+        // Ignored
+    }
+
     pub fn show_titlebar(&mut self, _show_titlebar: bool) {
         // Ignored
     }
