@@ -81,6 +81,25 @@ impl<'a> DelegateCtx<'a> {
 /// You customize the `AppDelegate` by implementing its methods on your own type.
 #[allow(unused)]
 pub trait AppDelegate<T: Data> {
+    /// The `AppDelegate`'s event handler. This function receives only
+    /// the focus events of top-windows, before they are passed down the tree.
+    ///
+    /// The return value of this function will be passed down the tree. This can
+    /// be the event that was passed in, a different event, or no event. In all cases,
+    /// the [`update()`] method will be called as usual.
+    ///
+    /// [`update()`]: trait.Widget.html#tymethod.update
+    fn focus(
+        &mut self,
+        ctx: &mut DelegateCtx,
+        window_id: WindowId,
+        window_handle: druid_shell::WindowHandle,
+        focus: bool,
+        data: &mut T,
+        env: &Env,
+    ) {
+    }
+
     /// The `AppDelegate`'s event handler. This function receives all
     /// non-command events, before they are passed down the tree.
     ///
