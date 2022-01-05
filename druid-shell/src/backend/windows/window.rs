@@ -1487,6 +1487,14 @@ impl WindowBuilder {
                 dwExStyle |= WS_EX_TOPMOST;
             }
 
+            if !self.show_in_taskbar {
+                dwExStyle |= WS_EX_TOOLWINDOW;
+            }
+
+            if self.always_on_top {
+                dwExStyle |= WS_EX_TOPMOST;
+            }
+
             if self.present_strategy == PresentStrategy::Flip {
                 dwExStyle |= WS_EX_NOREDIRECTIONBITMAP;
             }
